@@ -9,7 +9,7 @@
         :root {
             --bg-color: #0f0f10;
             --sidebar-bg: #18181b;
-            --accent-color: #00d4ff; /* Jarvis Blue */
+            --accent-color: #00d4ff;
             --text-color: #e0e0e0;
             --sidebar-width: 250px;
             --transition-speed: 0.3s;
@@ -23,7 +23,7 @@
             font-family: 'Segoe UI', Consolas, sans-serif;
             background-color: var(--bg-color);
             color: var(--text-color);
-            overflow: hidden; /* Prevent scroll on the main shell */
+            overflow: hidden;
         }
 
         /* LAYOUT CONTAINER */
@@ -32,7 +32,7 @@
             height: 100vh;
         }
 
-        /* FLYOUT SIDEBAR */
+        /* SIDEBAR */
         .sidebar {
             width: var(--sidebar-width);
             background-color: var(--sidebar-bg);
@@ -44,7 +44,6 @@
             height: 100%;
             z-index: 100;
             left: 0;
-            /* Default state: Open on desktop, handled via JS/Media queries if preferred */
         }
 
         .sidebar.closed {
@@ -59,6 +58,9 @@
             letter-spacing: 2px;
             text-transform: uppercase;
             color: var(--accent-color);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
         }
 
         .nav-links {
@@ -76,14 +78,16 @@
             padding: 15px 20px;
             color: var(--text-color);
             text-decoration: none;
-            transition: background 0.2s, padding-left 0.2s;
+            transition: background 0.2s, padding-left 0.2s, color 0.2s;
             cursor: pointer;
+            border-left: 3px solid transparent;
         }
 
-        .nav-links a:hover {
+        .nav-links a:hover, .nav-links a.active {
             background-color: #252526;
             padding-left: 25px;
             color: var(--accent-color);
+            border-left: 3px solid var(--accent-color);
         }
 
         /* MENU TOGGLE BUTTON */
@@ -99,18 +103,18 @@
             cursor: pointer;
             border-radius: 4px;
         }
-
+        
         .menu-toggle:hover {
             border-color: var(--accent-color);
         }
 
-        /* MAIN CONTENT AREA (IFRAME) */
+        /* MAIN CONTENT AREA */
         .main-content {
             flex-grow: 1;
             background-color: var(--bg-color);
             position: relative;
             transition: margin-left var(--transition-speed) ease;
-            margin-left: var(--sidebar-width); /* Push content when sidebar is open */
+            margin-left: var(--sidebar-width);
             height: 100%;
         }
 
@@ -123,6 +127,7 @@
             height: 100%;
             border: none;
             display: block;
+            opacity: 0; /* Starts invisible for fade-in */
         }
     </style>
 </head>
@@ -136,14 +141,15 @@
                 System: Aiden
             </div>
             <ul class="nav-links">
-                <li><a onclick="loadFrame('schedule.html')">Schedule</a></li>
-                <li><a onclick="loadFrame('about:blank')">Current Projects (TBD)</a></li>
-                <li><a onclick="loadFrame('about:blank')">Security Advisories (TBD)</a></li>
+                <li><a onclick="loadFrame('home.html', this)" class="active">Home</a></li>
+                <li><a onclick="loadFrame('schedule.html', this)">Schedule</a></li>
+                <li><a onclick="loadFrame('about:blank', this)">Current Projects</a></li>
+                <li><a onclick="loadFrame('about:blank', this)">Security Advisories</a></li>
             </ul>
         </nav>
 
         <main class="main-content" id="main-content">
-            <iframe id="app-frame" src="schedule.html" title="Content Viewport"></iframe>
+            <iframe id="app-frame" src="home.html" title="Content Viewport"></iframe>
         </main>
     </div>
 
@@ -151,6 +157,7 @@
         const sidebar = document.getElementById('sidebar');
         const mainContent = document.getElementById('main-content');
         const iframe = document.getElementById('app-frame');
+        const links = document.querySelectorAll('.nav-links a');
 
         // Toggle Sidebar Logic
         function toggleMenu() {
@@ -159,25 +166,34 @@
         }
 
         // Frame Loader Logic
-        function loadFrame(url) {
-            // Optional: Add a fade-out effect here if desired
+        function loadFrame(url, clickedElement) {
+            // Update Active State on Menu
+            links.forEach(link => link.classList.remove('active'));
+            if(clickedElement) clickedElement.classList.add('active');
+
+            // Fade Out
             iframe.style.opacity = '0';
             
             setTimeout(() => {
                 iframe.src = url;
-                // Fade back in after load
+                // Fade In after load
                 iframe.onload = () => {
                     iframe.style.opacity = '1';
                 };
             }, 200); 
 
-            // Mobile: Close menu automatically upon selection for cleaner UX
+            // Mobile: Close menu automatically
             if (window.innerWidth < 768) {
                 toggleMenu();
             }
         }
 
-        // Initial Fade In
+        // Initial Fade In on Page Load
+        window.onload = () => {
+            iframe.onload = () => {
+                iframe.style.opacity = '1';
+            };
+        };
         iframe.style.transition = 'opacity 0.3s ease';
     </script>
 </body>
