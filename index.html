@@ -3,73 +3,182 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aiden's Schedule</title>
+    <title>Aiden | Command Center</title>
     <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #121212; /* Dark mode background */
-            color: #ffffff;
+        /* CORE VARIABLES */
+        :root {
+            --bg-color: #0f0f10;
+            --sidebar-bg: #18181b;
+            --accent-color: #00d4ff; /* Jarvis Blue */
+            --text-color: #e0e0e0;
+            --sidebar-width: 250px;
+            --transition-speed: 0.3s;
+        }
+
+        body, html {
             margin: 0;
             padding: 0;
+            height: 100%;
+            width: 100%;
+            font-family: 'Segoe UI', Consolas, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            overflow: hidden; /* Prevent scroll on the main shell */
+        }
+
+        /* LAYOUT CONTAINER */
+        .container {
+            display: flex;
+            height: 100vh;
+        }
+
+        /* FLYOUT SIDEBAR */
+        .sidebar {
+            width: var(--sidebar-width);
+            background-color: var(--sidebar-bg);
+            border-right: 1px solid #333;
             display: flex;
             flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
+            transition: transform var(--transition-speed) ease;
+            position: absolute;
+            height: 100%;
+            z-index: 100;
+            left: 0;
+            /* Default state: Open on desktop, handled via JS/Media queries if preferred */
         }
 
-        header {
+        .sidebar.closed {
+            transform: translateX(-100%);
+        }
+
+        .sidebar-header {
             padding: 20px;
-            text-align: center;
-            width: 100%;
-            background-color: #1f1f1f;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.5);
+            font-size: 1.2rem;
+            font-weight: bold;
+            border-bottom: 1px solid #333;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--accent-color);
         }
 
-        h1 {
+        .nav-links {
+            list-style: none;
+            padding: 0;
             margin: 0;
-            font-weight: 300;
-            letter-spacing: 1.5px;
         }
 
-        .calendar-container {
-            width: 90%;
-            max-width: 1000px;
-            margin: 40px auto;
-            background: #ffffff;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        .nav-links li {
+            border-bottom: 1px solid #252526;
         }
 
-        /* Responsive Iframe Wrapper */
-        .responsive-iframe-container {
+        .nav-links a {
+            display: block;
+            padding: 15px 20px;
+            color: var(--text-color);
+            text-decoration: none;
+            transition: background 0.2s, padding-left 0.2s;
+            cursor: pointer;
+        }
+
+        .nav-links a:hover {
+            background-color: #252526;
+            padding-left: 25px;
+            color: var(--accent-color);
+        }
+
+        /* MENU TOGGLE BUTTON */
+        .menu-toggle {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            z-index: 200;
+            background: rgba(0,0,0,0.5);
+            border: 1px solid #333;
+            color: #fff;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        .menu-toggle:hover {
+            border-color: var(--accent-color);
+        }
+
+        /* MAIN CONTENT AREA (IFRAME) */
+        .main-content {
+            flex-grow: 1;
+            background-color: var(--bg-color);
             position: relative;
-            padding-bottom: 75%; /* Aspect ratio 4:3 */
-            height: 0;
-            overflow: hidden;
+            transition: margin-left var(--transition-speed) ease;
+            margin-left: var(--sidebar-width); /* Push content when sidebar is open */
+            height: 100%;
         }
 
-            .responsive-iframe-container iframe {
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                border: 0;
-            }
+        .main-content.expanded {
+            margin-left: 0;
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            display: block;
+        }
     </style>
 </head>
 <body>
 
-    <header>
-        <h1>Aiden's Availability</h1>
-    </header>
+    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
 
-    <div class="calendar-container">
-        <div class="responsive-iframe-container">
-            <iframe src="https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=America%2FLos_Angeles&showPrint=0&showNav=0&showTabs=0&mode=AGENDA&showCalendars=0&title=Aiden's%20Posted%20Schedule&src=cG5iZTY1YmNxZW1kNmZqNGk1Z2NzcmdxMzhAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ&color=%234285f4" style="border:solid 1px #777" width="800" height="600" frameborder="0" scrolling="no"></iframe>
-        </div>
+    <div class="container">
+        <nav class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                System: Aiden
+            </div>
+            <ul class="nav-links">
+                <li><a onclick="loadFrame('schedule.html')">Schedule</a></li>
+                <li><a onclick="loadFrame('about:blank')">Current Projects (TBD)</a></li>
+                <li><a onclick="loadFrame('about:blank')">Security Advisories (TBD)</a></li>
+            </ul>
+        </nav>
+
+        <main class="main-content" id="main-content">
+            <iframe id="app-frame" src="schedule.html" title="Content Viewport"></iframe>
+        </main>
     </div>
 
+    <script>
+        const sidebar = document.getElementById('sidebar');
+        const mainContent = document.getElementById('main-content');
+        const iframe = document.getElementById('app-frame');
+
+        // Toggle Sidebar Logic
+        function toggleMenu() {
+            sidebar.classList.toggle('closed');
+            mainContent.classList.toggle('expanded');
+        }
+
+        // Frame Loader Logic
+        function loadFrame(url) {
+            // Optional: Add a fade-out effect here if desired
+            iframe.style.opacity = '0';
+            
+            setTimeout(() => {
+                iframe.src = url;
+                // Fade back in after load
+                iframe.onload = () => {
+                    iframe.style.opacity = '1';
+                };
+            }, 200); 
+
+            // Mobile: Close menu automatically upon selection for cleaner UX
+            if (window.innerWidth < 768) {
+                toggleMenu();
+            }
+        }
+
+        // Initial Fade In
+        iframe.style.transition = 'opacity 0.3s ease';
+    </script>
 </body>
 </html>
