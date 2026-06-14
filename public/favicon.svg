@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  SnakeWorks favicon (SVG, modern browsers).
+
+  Square crop of the canonical logo per BRANDING.md rev 2 sizing rules
+  (Favicon / app icon: 48 px, icon stripped of tagline, square crop).
+  The full logo bounding box is [-2,103] x [-22,34] = 105 x 56 with
+  vertical center at y=6. This file centers the logo in a 105 x 105
+  viewBox so the natural pixel scale of the logo is preserved and the
+  whole mark is visible.
+
+  Geometry is verbatim from src/branding/Logo.tsx / Logo.xaml so any
+  brand-spec change must update all three files in lockstep.
+
+  The graphite eye and graphite mouth wedge are negative-space cutouts
+  that depend on a Graphite background. Most browsers render favicons
+  against a tab-strip-colored background which is typically dark
+  enough that the cutouts read correctly. For maximum fidelity in
+  bookmark folders and OS dock contexts, browsers fall back to
+  favicon.ico (the 7-frame multi-resolution PNG-format .ico).
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-2 -46.5 105 105">
+  <defs>
+    <linearGradient id="w" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#9CA1A8" />
+      <stop offset="1" stop-color="#585E66" />
+    </linearGradient>
+  </defs>
+
+  <rect x="-2" y="-46.5" width="105" height="105" fill="#1C1F26" />
+
+  <path d="M -2 7 L 6.4 3.334 L 6.4 10.666 Z" fill="#C5CAD1" />
+
+  <path
+    d="M 8 7 C 14.68 3.13 20.32 0 27 0 C 33.68 0 39.32 3.13 46 7 C 52.68 10.87 58.32 14 65 14 C 71.68 14 77.32 10.87 84 7"
+    fill="none" stroke="#C5CAD1" stroke-width="8"
+    stroke-linecap="round" stroke-linejoin="round" />
+
+  <path
+    d="M 78 7 C 78 4 80 1 84 1 C 89 1 94 3 94 7 C 94 11 89 13 84 13 C 80 13 78 10 78 7 Z"
+    fill="#C5CAD1" />
+
+  <path d="M 88 7 L 94 5 L 94 9 Z" fill="#1C1F26" />
+  <ellipse cx="88" cy="4" rx="1.2" ry="1" fill="#1C1F26" />
+
+  <path
+    d="M 89 7 L 99 7 M 99 7 L 103 5 M 99 7 L 103 9"
+    fill="none" stroke="#C5CAD1" stroke-width="1.5"
+    stroke-linecap="round" stroke-linejoin="round" />
+
+  <g transform="translate(22 -22) translate(24 28) skewX(8) translate(-24 -28)">
+    <path
+      d="M 0 0 L 12 56 M 18 0 L 30 56 M 36 0 L 48 56"
+      fill="none" stroke="url(#w)" stroke-width="8"
+      stroke-linecap="round" stroke-linejoin="round" />
+  </g>
+</svg>

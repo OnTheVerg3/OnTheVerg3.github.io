@@ -1,0 +1,105 @@
+/* =============================================================================
+   SnakeWorks brand tokens (CSS custom properties).
+   -----------------------------------------------------------------------------
+   Mirrors src/branding/tokens.ts. Update both files together when the brand
+   spec changes. Authority: SnakeWorks/BRANDING.md (rev 2, 2026-06-13).
+   ============================================================================= */
+
+:root {
+  /* ---- Coiled Silver palette ------------------------------------------- */
+  --brand-graphite: #1c1f26;
+  --brand-chrome: #c5cad1;
+  --brand-emerald: #1fad66;
+  --brand-soft-white: #f2f4f7;
+
+  /* ---- Surface elevation tints (overlay over graphite, not pre-mixed) -- */
+  --surface-0: var(--brand-graphite);
+  --surface-1: rgba(255, 255, 255, 0.04);
+  --surface-2: rgba(255, 255, 255, 0.08);
+  --surface-3: rgba(255, 255, 255, 0.12);
+
+  /* ---- Text tones ------------------------------------------------------ */
+  --text-primary: var(--brand-chrome);
+  --text-secondary: rgba(242, 244, 247, 0.72);
+  --text-tertiary: rgba(197, 202, 209, 0.6);
+  --text-tagline: rgba(242, 244, 247, 0.9);
+
+  /* ---- Lines / dividers ------------------------------------------------ */
+  --border-subtle: rgba(197, 202, 209, 0.12);
+  --border-emphasis: rgba(197, 202, 209, 0.24);
+
+  /* ---- Focus ring (emerald + chrome offset for accessibility) ---------- */
+  --focus-ring: var(--brand-emerald);
+  --focus-ring-offset: rgba(197, 202, 209, 0.4);
+
+  /* ---- Typography ------------------------------------------------------ */
+  --font-display:
+    'Segoe UI Variable Display', 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont,
+    'Helvetica Neue', Arial, sans-serif;
+  --font-body:
+    'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+  --font-mono: 'Cascadia Mono', 'Consolas', 'Courier New', monospace;
+
+  /* ---- Type scale (px) ------------------------------------------------- */
+  --fs-body: 14px;
+  --fs-body-lg: 16px;
+  --fs-headline-sm: 18px;
+  --fs-headline-lg: 22px;
+  --fs-display-sm: 28px;
+  --fs-display-md: 36px;
+  --fs-display-lg: 48px;
+
+  /* ---- Font weights ---------------------------------------------------- */
+  --fw-regular: 400;
+  --fw-semibold: 600;
+  --fw-bold: 700;
+
+  /* ---- Spacing scale --------------------------------------------------- */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-24: 96px;
+
+  /* ---- Radius ---------------------------------------------------------- */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 16px;
+
+  /* ---- Motion ---------------------------------------------------------- */
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-entrance: cubic-bezier(0, 0, 0.2, 1);
+  --ease-exit: cubic-bezier(0.4, 0, 1, 1);
+  --duration-fast: 120ms;
+  --duration-normal: 240ms;
+  --duration-slow: 400ms;
+  --duration-page: 600ms;
+
+  /* ---- Logo W metallic-gradient stops (per BRANDING.md rev 2) --------- */
+  --w-gradient-top: #9ca1a8;
+  --w-gradient-bottom: #585e66;
+
+  /* ---- Logo geometry (canonical viewBox) ------------------------------ */
+  --logo-aspect-ratio: 1.875;
+
+  /* ---- Z-index scale --------------------------------------------------- */
+  --z-base: 0;
+  --z-elevated: 10;
+  --z-sticky-nav: 100;
+  --z-overlay: 1000;
+  --z-modal: 1100;
+  --z-toast: 1200;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --duration-fast: 0ms;
+    --duration-normal: 0ms;
+    --duration-slow: 0ms;
+    --duration-page: 0ms;
+  }
+}
