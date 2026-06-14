@@ -1,0 +1,18 @@
+.shell {
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  background-color: var(--brand-graphite);
+}
+
+.main {
+  display: block;
+  outline: none;
+}
+
+/* Removes the default focus-ring on the programmatic main focus target.
+   Keyboard users still see a focus ring on links, buttons, and form
+   controls within main per the global :focus-visible rule. */
+.main:focus {
+  outline: none;
+}

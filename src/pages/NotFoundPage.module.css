@@ -1,0 +1,15 @@
+.eyebrow {
+  color: var(--brand-emerald);
+}
+
+.homeLink {
+  color: var(--brand-emerald);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color var(--duration-fast) var(--ease-standard);
+}
+
+.homeLink:hover,
+.homeLink:focus-visible {
+  border-bottom-color: var(--brand-emerald);
+}

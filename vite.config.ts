@@ -40,9 +40,28 @@ export default defineConfig({
     chunkSizeWarningLimit: 600,
     rollupOptions: {
       output: {
-        manualChunks: {
-          react: ['react', 'react-dom'],
-          router: ['react-router-dom'],
+        // Function form. The Phase A object form
+        //   manualChunks: { react: ['react', 'react-dom'], router: [...] }
+        // generated an empty react chunk under Vite 7 because the modern
+        // React JSX-runtime entry points (`react/jsx-runtime`, the
+        // internal scheduler package, `react-dom/client`) are not literal
+        // matches for the strings `'react'` / `'react-dom'`. The function
+        // below matches any module path inside node_modules whose folder
+        // starts with `react`, `react-dom`, or `scheduler` (React's
+        // bundled scheduler) and routes it to the `react` chunk, and
+        // routes `react-router*` modules to a separate `router` chunk so
+        // routing internals stay cacheable across React upgrades.
+        manualChunks(id: string): string | undefined {
+          if (!id.includes('node_modules')) {
+            return undefined;
+          }
+          if (id.includes('react-router') || id.includes('@remix-run')) {
+            return 'router';
+          }
+          if (id.includes('/react-dom/') || id.includes('/react/') || id.includes('/scheduler/')) {
+            return 'react';
+          }
+          return undefined;
         },
       },
     },

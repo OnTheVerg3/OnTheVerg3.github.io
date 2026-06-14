@@ -1,0 +1,115 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-overlay);
+  background-color: var(--brand-graphite);
+  display: flex;
+  flex-direction: column;
+  animation: fadeIn var(--duration-fast) var(--ease-entrance);
+}
+
+.close {
+  position: absolute;
+  top: var(--space-4);
+  right: var(--space-4);
+  background: transparent;
+  border: 1px solid var(--border-subtle);
+  color: var(--brand-chrome);
+  padding: var(--space-2);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition:
+    background-color var(--duration-fast) var(--ease-standard),
+    border-color var(--duration-fast) var(--ease-standard),
+    color var(--duration-fast) var(--ease-standard);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.close:hover,
+.close:focus-visible {
+  background-color: var(--surface-2);
+  border-color: var(--border-emphasis);
+  color: var(--brand-soft-white);
+}
+
+.nav {
+  flex: 1 1 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-12) var(--space-6);
+}
+
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  align-items: center;
+  text-align: center;
+}
+
+.item {
+  display: block;
+}
+
+.link {
+  display: inline-block;
+  position: relative;
+  padding: var(--space-3) var(--space-4);
+  font-family: var(--font-display);
+  font-size: var(--fs-display-sm);
+  font-weight: var(--fw-semibold);
+  color: var(--brand-chrome);
+  text-decoration: none;
+  letter-spacing: -0.005em;
+  transition: color var(--duration-fast) var(--ease-standard);
+}
+
+.link::after {
+  content: '';
+  position: absolute;
+  left: var(--space-4);
+  right: var(--space-4);
+  bottom: var(--space-1);
+  height: 2px;
+  background-color: var(--brand-emerald);
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform var(--duration-normal) var(--ease-standard);
+}
+
+.link:hover,
+.link:focus-visible {
+  color: var(--brand-soft-white);
+}
+
+.linkActive {
+  color: var(--brand-soft-white);
+}
+
+.linkActive::after {
+  transform: scaleX(1);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .overlay {
+    animation: none;
+  }
+  .link::after {
+    transition: none;
+  }
+}
