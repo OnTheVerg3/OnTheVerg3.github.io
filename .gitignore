@@ -103,3 +103,13 @@ $RECYCLE.BIN/
 scratch/
 TODO.local.md
 NOTES.local.md
+
+# ---- Internal / non-public documentation -----------------------------------
+# These files were originally committed under SnakeWorks/Portfolio/ but
+# have been moved to SnakeWorks/Portfolio-Internal/ (a sibling folder, not
+# part of this repo) so they are never pushed to GitHub. Gitignored here
+# as defense in depth: if a copy ever lands in the working tree (e.g. a
+# stray write from a tool, a paste from agent transcripts) git will not
+# pick it up.
+ARCHITECTURE.md
+PROMPT.md
