@@ -1,0 +1,109 @@
+/* =============================================================================
+   SnakeWorks Portfolio - Phase A bootstrap stylesheet
+   -----------------------------------------------------------------------------
+   Phase A intentionally ships only a minimal CSS reset and a brand-coherent
+   placeholder treatment. The full Coiled Silver brand tokens (palette,
+   surface tints, typography scale, motion curves, W-gradient stops) land in
+   Phase B at src/branding/tokens.css and are merged at the global level.
+   ============================================================================= */
+
+/* ---- Reset ---------------------------------------------------------------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+body {
+  background-color: #1c1f26;
+  color: #c5cad1;
+  font-family:
+    'Segoe UI Variable Text',
+    'Segoe UI',
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    'Helvetica Neue',
+    Arial,
+    sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+img,
+svg,
+video,
+canvas {
+  display: block;
+  max-width: 100%;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+/* ---- Phase A placeholder -------------------------------------------------- */
+.phase-a-placeholder {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 48px 24px;
+  background:
+    radial-gradient(ellipse at 50% 30%, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0) 60%),
+    #1c1f26;
+}
+
+.phase-a-placeholder__inner {
+  max-width: 560px;
+  text-align: center;
+}
+
+.phase-a-placeholder__eyebrow {
+  margin: 0 0 12px;
+  font-size: 13px;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: rgba(197, 202, 209, 0.72);
+}
+
+.phase-a-placeholder__title {
+  margin: 0 0 18px;
+  font-family: 'Segoe UI Variable Display', 'Segoe UI', system-ui, sans-serif;
+  font-size: clamp(40px, 8vw, 64px);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: #c5cad1;
+  line-height: 1.05;
+}
+
+.phase-a-placeholder__tagline {
+  margin: 0 0 32px;
+  font-size: 18px;
+  color: rgba(242, 244, 247, 0.9);
+}
+
+.phase-a-placeholder__tagline em {
+  font-style: italic;
+}
+
+.phase-a-placeholder__phase {
+  margin: 0;
+  font-size: 14px;
+  color: rgba(197, 202, 209, 0.6);
+  line-height: 1.6;
+}

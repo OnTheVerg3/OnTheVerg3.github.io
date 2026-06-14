@@ -1,0 +1,23 @@
+node_modules/
+dist/
+build/
+coverage/
+.vite/
+.cache/
+*.tsbuildinfo
+*.log
+.eslintcache
+
+# Legacy static HTML at repo root, untouched until Phase I (Legacy Cleanup).
+home.html
+schedule.html
+
+# Scaffolding and project documentation authored manually with deliberate
+# table alignment, code-block layout, and column structure. Markdown
+# formatting is opt-in per project, not blanket.
+ARCHITECTURE.md
+PROMPT.md
+README.md
+LICENSE
+LICENSE.md
+CHANGELOG.md
