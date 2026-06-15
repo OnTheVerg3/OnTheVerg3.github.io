@@ -1,0 +1,33 @@
+.introRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-6);
+  margin-bottom: var(--space-8);
+  padding: var(--space-6);
+  background-color: var(--surface-1);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+}
+
+.logoMark {
+  flex-shrink: 0;
+}
+
+.introCopy {
+  margin: 0;
+  flex: 1 1 240px;
+  font-size: var(--fs-body-lg);
+  color: var(--text-secondary);
+  line-height: 1.6;
+  max-width: 56ch;
+}
+
+.tagline {
+  color: var(--text-tagline);
+  font-style: italic;
+}
+
+.cardIcon {
+  color: var(--brand-emerald);
+}

@@ -1,0 +1,42 @@
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  font-weight: var(--fw-semibold);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  line-height: 1.4;
+  border: 1px solid transparent;
+}
+
+.emerald {
+  color: var(--brand-emerald);
+  background-color: rgba(31, 173, 102, 0.12);
+  border-color: rgba(31, 173, 102, 0.28);
+}
+
+.chrome {
+  color: var(--brand-chrome);
+  background-color: var(--surface-1);
+  border-color: var(--border-subtle);
+}
+
+.muted {
+  color: var(--text-secondary);
+  background-color: var(--surface-1);
+  border-color: var(--border-subtle);
+}
+
+.warning {
+  color: #f0b429;
+  background-color: rgba(240, 180, 41, 0.1);
+  border-color: rgba(240, 180, 41, 0.28);
+}
+
+.critical {
+  color: #f87171;
+  background-color: rgba(248, 113, 113, 0.1);
+  border-color: rgba(248, 113, 113, 0.28);
+}

@@ -1,0 +1,55 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-6);
+  background-color: var(--surface-1);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  transition:
+    border-color var(--duration-normal) var(--ease-standard),
+    background-color var(--duration-normal) var(--ease-standard),
+    transform var(--duration-normal) var(--ease-standard);
+}
+
+.interactive {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+.interactive:hover,
+.interactive:focus-visible {
+  border-color: rgba(31, 173, 102, 0.45);
+  background-color: var(--surface-2);
+  transform: translateY(-2px);
+}
+
+.title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: var(--fs-headline-sm);
+  font-weight: var(--fw-semibold);
+  color: var(--brand-chrome);
+  line-height: 1.25;
+}
+
+.tagline {
+  margin: 0;
+  font-size: var(--fs-body);
+  color: var(--text-secondary);
+  line-height: 1.55;
+}
+
+.footer {
+  margin-top: auto;
+  padding-top: var(--space-2);
+  font-size: var(--fs-body);
+  color: var(--brand-emerald);
+  font-weight: var(--fw-semibold);
+}
+
+.footerMuted {
+  color: var(--text-tertiary);
+  font-weight: var(--fw-regular);
+}

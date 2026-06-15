@@ -1,0 +1,84 @@
+.section {
+  padding: var(--space-16) var(--space-6) var(--space-8);
+  animation: pageFadeIn var(--duration-normal) var(--ease-entrance);
+}
+
+.inner {
+  max-width: 960px;
+  margin: 0 auto;
+  display: grid;
+  gap: var(--space-6);
+}
+
+.wide {
+  max-width: 1120px;
+}
+
+.eyebrow {
+  margin: 0;
+  font-size: 13px;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--brand-emerald);
+}
+
+.title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(var(--fs-display-sm), 5vw, var(--fs-display-md));
+  font-weight: var(--fw-semibold);
+  letter-spacing: -0.01em;
+  color: var(--brand-chrome);
+  line-height: 1.05;
+}
+
+.description {
+  margin: 0;
+  font-size: var(--fs-body-lg);
+  color: var(--text-secondary);
+  line-height: 1.65;
+  max-width: 68ch;
+}
+
+.description p {
+  margin: 0 0 var(--space-4);
+}
+
+.description p:last-child {
+  margin-bottom: 0;
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  align-items: center;
+}
+
+.body {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 var(--space-6) var(--space-16);
+  animation: pageFadeIn var(--duration-normal) var(--ease-entrance);
+}
+
+.bodyWide {
+  max-width: 1120px;
+}
+
+@keyframes pageFadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .section,
+  .body {
+    animation: none;
+  }
+}

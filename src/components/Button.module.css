@@ -1,0 +1,53 @@
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md);
+  font-size: var(--fs-body);
+  font-weight: var(--fw-semibold);
+  line-height: 1.2;
+  text-decoration: none;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition:
+    background-color var(--duration-fast) var(--ease-standard),
+    border-color var(--duration-fast) var(--ease-standard),
+    color var(--duration-fast) var(--ease-standard);
+}
+
+.primary {
+  color: var(--brand-graphite);
+  background-color: var(--brand-emerald);
+  border-color: var(--brand-emerald);
+}
+
+.primary:hover,
+.primary:focus-visible {
+  background-color: #24c472;
+  border-color: #24c472;
+}
+
+.ghost {
+  color: var(--brand-chrome);
+  background-color: transparent;
+  border-color: var(--border-emphasis);
+}
+
+.ghost:hover,
+.ghost:focus-visible {
+  border-color: var(--brand-emerald);
+  color: var(--brand-emerald);
+}
+
+.outline {
+  color: var(--brand-emerald);
+  background-color: transparent;
+  border-color: rgba(31, 173, 102, 0.45);
+}
+
+.outline:hover,
+.outline:focus-visible {
+  background-color: rgba(31, 173, 102, 0.08);
+}

@@ -1,0 +1,31 @@
+.embedShell {
+  position: relative;
+  width: 100%;
+  min-height: 600px;
+  background-color: var(--surface-1);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.embed {
+  display: block;
+  width: 100%;
+  min-height: 600px;
+  border: 0;
+  background-color: #ffffff;
+}
+
+.note {
+  margin: var(--space-4) 0 0;
+  font-size: var(--fs-body);
+  color: var(--text-tertiary);
+  line-height: 1.5;
+}
+
+@media (max-width: 768px) {
+  .embedShell,
+  .embed {
+    min-height: 480px;
+  }
+}

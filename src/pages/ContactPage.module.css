@@ -1,0 +1,58 @@
+.methodList {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: var(--space-4);
+}
+
+.methodItem {
+  display: flex;
+  gap: var(--space-4);
+  padding: var(--space-6);
+  background-color: var(--surface-1);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+}
+
+.methodIcon {
+  flex-shrink: 0;
+  color: var(--brand-emerald);
+  margin-top: var(--space-1);
+}
+
+.methodTitle {
+  margin: 0 0 var(--space-2);
+  font-size: var(--fs-headline-sm);
+  font-weight: var(--fw-semibold);
+  color: var(--brand-chrome);
+}
+
+.methodDescription {
+  margin: 0 0 var(--space-3);
+  font-size: var(--fs-body-lg);
+  color: var(--text-secondary);
+  line-height: 1.55;
+  max-width: 52ch;
+}
+
+.emailLink {
+  color: var(--brand-emerald);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  font-size: var(--fs-body-lg);
+  transition: border-color var(--duration-fast) var(--ease-standard);
+}
+
+.emailLink:hover,
+.emailLink:focus-visible {
+  border-bottom-color: var(--brand-emerald);
+}
+
+.note {
+  margin: 0;
+  font-size: var(--fs-body-lg);
+  color: var(--text-secondary);
+  line-height: 1.6;
+  max-width: 68ch;
+}

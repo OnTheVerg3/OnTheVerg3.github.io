@@ -1,20 +1,54 @@
 import type { ReactElement } from 'react';
 
-import { PagePlaceholder } from './PagePlaceholder';
+import { Badge } from '../components/Badge';
+import { Card } from '../components/Card';
+import grid from '../components/ContentDisplay.module.css';
+import { PageBody, PageHeader } from '../components/PageHeader';
+import { getAllProjects, getProjectDisplayName } from '../content';
+import { projectStatusLabel } from '../content/display';
 
 export function ProjectsIndexPage(): ReactElement {
+  const catalogue = getAllProjects();
+
   return (
-    <PagePlaceholder
-      eyebrow="Projects"
-      title="Featured work"
-      description={
-        <p>
-          Non-SnakeWorks projects across game internals, security research, frameworks, and tooling.
-          The <code>ProjectEntry</code> schema includes a<code> disclosed </code>
-          boolean that gates whether each entry shows full names or abstract framing; per-project
-          decisions are made during Phase D content authoring.
-        </p>
-      }
-    />
+    <>
+      <PageHeader
+        description={
+          <p>
+            Selected work across game internals, security research, frameworks, and tooling. Entries
+            marked undisclosed show abstract framing only; full names and deep dives appear when the
+            operator has cleared them for publication.
+          </p>
+        }
+        eyebrow="Projects"
+        title="Featured work"
+        wide
+      />
+
+      <PageBody wide>
+        <div className={grid.grid}>
+          {catalogue.map((project) => (
+            <Card
+              footer={`View ${getProjectDisplayName(project)}`}
+              key={project.slug}
+              tagline={project.summary}
+              title={getProjectDisplayName(project)}
+              to={`/projects/${project.slug}`}
+            >
+              <div className={grid.chipList}>
+                {!project.disclosed ? <Badge variant="muted">Undisclosed</Badge> : null}
+                <Badge variant="chrome">{String(project.year)}</Badge>
+                <Badge variant="muted">{projectStatusLabel(project)}</Badge>
+                {project.tags?.map((tag) => (
+                  <Badge key={tag} variant="chrome">
+                    {tag}
+                  </Badge>
+                ))}
+              </div>
+            </Card>
+          ))}
+        </div>
+      </PageBody>
+    </>
   );
 }
