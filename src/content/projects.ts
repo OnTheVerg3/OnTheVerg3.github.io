@@ -4,10 +4,11 @@ import type { ProjectEntry } from './types';
  * Non-SnakeWorks project portfolio.
  *
  * Curated to surface the bigger applications the operator has built:
- * security suites, system-level modifiers, kernel research, red-team
- * infrastructure, and substantial native or full-stack utilities. Game
- * modifications, game-internal frameworks, and anti-cheat research are
- * intentionally excluded from this surface.
+ * security suites, system-level modifiers, kernel + hypervisor research,
+ * red-team infrastructure, and substantial native or full-stack
+ * utilities. Game modifications, game-internal frameworks, and
+ * standalone game-modding projects are intentionally excluded from
+ * this surface.
  *
  * Disclosure posture:
  *
@@ -47,6 +48,36 @@ export const projects: readonly ProjectEntry[] = [
     tags: ['c2', 'red-team', 'windows'],
     tech: ['Go', 'C#', '.NET', 'React', 'Electron', 'Python', 'WebSocket', 'TLS'],
     status: 'active',
+  },
+  {
+    slug: 'eacinformer',
+    disclosed: true,
+    publicName: 'EACInformer',
+    privateName: 'EACInformer',
+    summary:
+      'Kernel and hypervisor anti-tamper research platform. Six native components ' +
+      'spanning a proxy DLL, a WDK kernel driver, a BYOVD mapper, a Direct2D overlay, ' +
+      'an embedded hypervisor, and a C++ operator dashboard.',
+    description:
+      'The most architecturally complex project in the portfolio. Six native ' +
+      'components coordinate via shared-memory IPC between kernel and user-mode: the ' +
+      'proxy DLL is an EOSSDK-shaped trampoline (x64 ASM export forwarding) used as ' +
+      'the in-process foothold; the WDK kernel driver targets NTDDI 0x0A00000C ' +
+      '(Windows 10 / 11 build 26100) with eight modules (config, interceptor, ' +
+      'ipc_server, logger and matching headers) covering inter-process state, page ' +
+      'interception, and userland communication; the BYOVD mapper follows the ' +
+      'kdmapper pattern for loading unsigned drivers via a known-vulnerable signed ' +
+      'driver; the Direct2D plus DirectWrite overlay implements ETW-based frame-time ' +
+      'tracking; the hypervisor is a separate CMake project with its own build ' +
+      'system, providing introspection beneath the kernel; the dashboard is a ' +
+      'CMake-built C++ operator console (not web-based). A single run.bat orchestrates ' +
+      'the full pipeline: build every component, map the driver, launch the overlay. ' +
+      'A dedicated test suite covers known regressions from earlier kernel-memory- ' +
+      'access BSOD patterns.',
+    year: '2023-2025',
+    tags: ['kernel', 'hypervisor', 'security-research', 'windows'],
+    tech: ['C++17 / 20', 'MASM', 'WDK', 'CMake', 'Direct2D', 'DirectWrite', 'ETW'],
+    status: 'shipped',
   },
   {
     slug: 'spectre',
