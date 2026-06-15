@@ -25,7 +25,7 @@ export function AboutPage(): ReactElement {
     path: '/about',
     title: 'About',
     description:
-      'Aiden (OnTheVerg3) is a Software Developer and Security Advisor. SnakeWorks is the product label for focused native utilities shipping one job per executable with full behavioural transparency.',
+      'Aiden (OnTheVerg3) is a Software Developer and Security Advisor. SnakeWorks is the software label for native products built carefully, behaving predictably, and documented with full behavioural transparency.',
     jsonLd: ABOUT_JSON_LD,
   });
 
@@ -35,8 +35,8 @@ export function AboutPage(): ReactElement {
         description={
           <p>
             Aiden (OnTheVerg3) is a Software Developer and Security Advisor. SnakeWorks is the
-            product label for focused native utilities; this site is the unified corporate and
-            personal portfolio at https://ontheverg3.github.io.
+            software label for native products built carefully and documented thoroughly; this site
+            is the unified corporate and personal portfolio at https://ontheverg3.github.io.
           </p>
         }
         eyebrow="About"
@@ -47,11 +47,11 @@ export function AboutPage(): ReactElement {
         <Section title="The operator">
           <div className={styles.prose}>
             <p>
-              Work spans game internals and modding, Windows internals, offensive security research,
-              native C/C++ and .NET development, and web tooling. The through-line is building
-              precise, auditable systems: utilities that do one thing well, research frameworks with
-              explicit threat models, and advisories that document findings with the same rigor as
-              the code.
+              Work spans Windows internals, kernel and hypervisor research, offensive security
+              tooling, native C / C++ and .NET development, full-stack web, and game internals. The
+              through-line is building precise, auditable systems: products that earn their
+              reliability claims, research platforms with explicit threat models, and advisories
+              that document findings with the same rigor as the code.
             </p>
             <p>
               Security advisory work is conducted for educational purposes and to advise vendors of
@@ -64,16 +64,18 @@ export function AboutPage(): ReactElement {
         <Section title="SnakeWorks">
           <div className={styles.prose}>
             <p>
-              SnakeWorks ships focused, native, single-file Windows utilities: no installers, no
-              bundled runtimes, no telemetry. Drop an executable on a thumb drive and run it. The
-              Coiled Silver palette (graphite, chrome, emerald, soft white) governs every branded
-              surface, native and web alike.
+              SnakeWorks is a software label built around the standard the tagline implies: things
+              that work, plainly and reliably, and explain themselves. Products span focused
+              single-task tools, multi-component suites, and full applications, deployed wherever
+              the problem lives. The Coiled Silver palette (graphite, chrome, emerald, soft white)
+              governs every branded surface, native and web alike.
             </p>
             <p>
-              ClickWright is the first public product: a precision wall-clock mouse click scheduler
-              built with WPF, MVVM, and a hand-rolled P/Invoke layer. More utilities will follow the
-              same contract: one job, one executable, full behavioural transparency documented in
-              the product README.
+              ClickWright is the first public release: a precision wall-clock mouse click scheduler
+              built with WPF, MVVM, and a hand-rolled P/Invoke layer. It is one specific shape
+              SnakeWorks software can take; future products will adopt whatever shape the problem
+              requires, held to the same standard of craft, behavioural transparency, and documented
+              surface.
             </p>
           </div>
         </Section>

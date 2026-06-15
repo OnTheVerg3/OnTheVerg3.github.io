@@ -25,7 +25,8 @@ const landingCards: readonly LandingCard[] = [
   {
     to: '/products',
     title: 'Products',
-    description: 'SnakeWorks-branded utilities built to do one thing well.',
+    description:
+      'SnakeWorks-branded software, from focused single-task tools to multi-component suites.',
     icon: Package,
   },
   {
@@ -87,10 +88,11 @@ export function LandingPage(): ReactElement {
               <em>It sssimply works.</em>
             </p>
             <p className={styles.heroText}>
-              SnakeWorks ships focused, native, single-file Windows utilities. No installers, no
-              bundled runtimes, no telemetry. Drop an executable on a thumb drive and run it. The
-              same standard applies to security research, advisories, and every other surface of the
-              portfolio.
+              SnakeWorks is a software label built around one standard: ship things that work,
+              plainly and reliably, and document what they do down to the system-call surface.
+              Products range from focused single-task tools to multi-component suites, deployed
+              wherever the problem lives. The same standard applies to security research,
+              advisories, and every other surface of the portfolio.
             </p>
           </div>
         </section>

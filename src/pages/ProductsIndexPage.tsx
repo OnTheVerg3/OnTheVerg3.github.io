@@ -13,7 +13,7 @@ export function ProductsIndexPage(): ReactElement {
     path: '/products',
     title: 'Products',
     description:
-      'SnakeWorks-branded Windows utilities built to do one job with full behavioural transparency. Each product ships as a focused native executable with no installer, no telemetry, and a documented P/Invoke surface.',
+      'SnakeWorks-branded software spanning focused single-task tools, multi-component suites, and full applications. Built native, documented down to the system-call surface, and shipped with full behavioural transparency.',
   });
 
   const catalogue = getAllProducts();
@@ -23,9 +23,9 @@ export function ProductsIndexPage(): ReactElement {
       <PageHeader
         description={
           <p>
-            SnakeWorks-branded utilities built to do one job with full behavioural transparency.
-            Each product ships as a focused native executable with documented P/Invoke surfaces and
-            no telemetry.
+            SnakeWorks-branded software ranging from focused single-task tools to multi-component
+            suites. Every product is built native, documented down to the system-call surface, and
+            ships with full behavioural transparency.
           </p>
         }
         eyebrow="Products"
