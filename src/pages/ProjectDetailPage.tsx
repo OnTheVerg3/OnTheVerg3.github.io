@@ -7,6 +7,7 @@ import { DetailNotFound } from '../components/DetailNotFound';
 import { ExternalLink } from '../components/ExternalLink';
 import { PageBody, PageHeader } from '../components/PageHeader';
 import { Section } from '../components/Section';
+import { Stat, StatList } from '../components/Stat';
 import { getProjectBySlug, getProjectDisplayName } from '../content';
 import { projectStatusLabel } from '../content/display';
 import styles from './ProjectDetailPage.module.css';
@@ -29,6 +30,8 @@ export function ProjectDetailPage(): ReactElement {
   }
 
   const displayName = getProjectDisplayName(project);
+  const techList = project.tech ?? [];
+  const linkList = project.disclosed ? (project.links ?? []) : [];
 
   return (
     <>
@@ -62,8 +65,15 @@ export function ProjectDetailPage(): ReactElement {
           </div>
         ) : null}
 
-        <Section title="Summary">
-          <p className={grid.featureDescription}>{project.summary}</p>
+        <Section title="At a glance">
+          <StatList>
+            <Stat label="Year" value={String(project.year)} />
+            <Stat label="Status" value={projectStatusLabel(project)} />
+            <Stat label="Disclosure" value={project.disclosed ? 'Public' : 'Gated'} />
+            {project.tags !== undefined && project.tags.length > 0 ? (
+              <Stat label="Tags" value={project.tags.join(' · ')} />
+            ) : null}
+          </StatList>
         </Section>
 
         {project.disclosed && project.description !== undefined ? (
@@ -72,10 +82,10 @@ export function ProjectDetailPage(): ReactElement {
           </Section>
         ) : null}
 
-        {project.tech !== undefined && project.tech.length > 0 ? (
+        {techList.length > 0 ? (
           <Section title="Technology">
             <ul className={grid.chipList}>
-              {project.tech.map((item) => (
+              {techList.map((item) => (
                 <li className={grid.chip} key={item}>
                   {item}
                 </li>
@@ -84,10 +94,10 @@ export function ProjectDetailPage(): ReactElement {
           </Section>
         ) : null}
 
-        {project.disclosed && project.links !== undefined && project.links.length > 0 ? (
+        {linkList.length > 0 ? (
           <Section title="Links">
             <ul className={grid.chipList}>
-              {project.links.map((link) => (
+              {linkList.map((link) => (
                 <li key={link.url}>
                   <ExternalLink href={link.url}>{link.label}</ExternalLink>
                 </li>

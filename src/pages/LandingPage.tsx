@@ -3,9 +3,9 @@ import type { ReactElement } from 'react';
 
 import { Logo } from '../branding/Logo';
 import { Card } from '../components/Card';
+import grid from '../components/ContentDisplay.module.css';
 import { PageBody, PageHeader } from '../components/PageHeader';
 import styles from './LandingPage.module.css';
-import grid from '../components/ContentDisplay.module.css';
 
 interface LandingCard {
   readonly to: string;
@@ -58,16 +58,11 @@ export function LandingPage(): ReactElement {
     <>
       <PageHeader
         description={
-          <>
-            <p>
-              The corporate face of SnakeWorks and the personal portfolio of Aiden (OnTheVerg3),
-              Software Developer and Security Advisor. One cohesive surface, two identities,
-              differentiated by routing and content rather than visual styling.
-            </p>
-            <p className={styles.tagline}>
-              <em>It sssimply works.</em>
-            </p>
-          </>
+          <p>
+            The corporate face of SnakeWorks and the personal portfolio of Aiden (OnTheVerg3),
+            Software Developer and Security Advisor. One cohesive surface, two identities,
+            differentiated by routing and content rather than visual styling.
+          </p>
         }
         eyebrow="SnakeWorks"
         title="Portfolio"
@@ -75,16 +70,25 @@ export function LandingPage(): ReactElement {
       />
 
       <PageBody wide>
-        <div aria-label="Site sections" className={styles.introRow} role="navigation">
+        <section aria-label="Studio statement" className={styles.hero}>
           <div className={styles.logoMark}>
-            <Logo ariaLabel="" size={72} />
+            <Logo ariaLabel="" size={56} />
           </div>
-          <p className={styles.introCopy}>
-            Choose a section below or use the navigation above. There is no traditional hero on this
-            landing surface; the site opens directly into the work.
-          </p>
-        </div>
+          <div className={styles.heroCopy}>
+            <p className={styles.heroEyebrow}>Studio statement</p>
+            <p className={styles.tagline}>
+              <em>It sssimply works.</em>
+            </p>
+            <p className={styles.heroText}>
+              SnakeWorks ships focused, native, single-file Windows utilities. No installers, no
+              bundled runtimes, no telemetry. Drop an executable on a thumb drive and run it. The
+              same standard applies to security research, advisories, and every other surface of the
+              portfolio.
+            </p>
+          </div>
+        </section>
 
+        <h2 className={styles.sectionHeading}>Explore the site</h2>
         <div className={grid.grid}>
           {landingCards.map(({ to, title, description, icon: Icon }) => (
             <Card footer="Open section" key={to} tagline={description} title={title} to={to}>

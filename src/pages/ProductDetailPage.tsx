@@ -5,10 +5,12 @@ import { Badge } from '../components/Badge';
 import grid from '../components/ContentDisplay.module.css';
 import { DetailNotFound } from '../components/DetailNotFound';
 import { ExternalLink } from '../components/ExternalLink';
+import { FeatureGrid } from '../components/FeatureGrid';
 import { PageBody, PageHeader } from '../components/PageHeader';
 import { Section } from '../components/Section';
-import { formatPlatformLabel, productStatusVariant } from '../content/display';
+import { Stat, StatList } from '../components/Stat';
 import { getProductBySlug } from '../content';
+import { formatPlatformLabel, productStatusVariant } from '../content/display';
 import { formatBytes, formatISODate } from '../utils/format';
 
 export function ProductDetailPage(): ReactElement {
@@ -29,6 +31,11 @@ export function ProductDetailPage(): ReactElement {
   }
 
   const latestRelease = product.releaseHistory?.[0];
+  const hasLinks = product.repoUrl !== undefined || product.websiteUrl !== undefined;
+  const releaseSectionSubtitle =
+    latestRelease?.highlights !== undefined
+      ? 'Highlights and release metadata for the current public build.'
+      : undefined;
 
   return (
     <>
@@ -53,21 +60,8 @@ export function ProductDetailPage(): ReactElement {
       />
 
       <PageBody wide>
-        <Section subtitle={product.tagline} title="Overview">
-          <p className={grid.featureDescription}>{product.summary}</p>
-        </Section>
-
-        <Section title="Features">
-          <ul className={grid.featureList}>
-            {product.features.map((feature) => (
-              <li className={grid.featureItem} key={feature.title}>
-                <h3 className={grid.featureTitle}>{feature.title}</h3>
-                {feature.description !== undefined ? (
-                  <p className={grid.featureDescription}>{feature.description}</p>
-                ) : null}
-              </li>
-            ))}
-          </ul>
+        <Section subtitle={product.tagline} title="Features">
+          <FeatureGrid items={product.features} />
         </Section>
 
         <Section title="Technology">
@@ -81,55 +75,55 @@ export function ProductDetailPage(): ReactElement {
         </Section>
 
         {latestRelease !== undefined ? (
-          <Section title="Latest release">
-            <ul className={grid.featureList}>
-              <li className={grid.featureItem}>
-                <h3 className={grid.featureTitle}>
-                  Version {latestRelease.version}
-                  <span className={grid.timelineDate}> · {formatISODate(latestRelease.date)}</span>
-                </h3>
-                {latestRelease.highlights !== undefined ? (
-                  <ul className={grid.featureList}>
-                    {latestRelease.highlights.map((highlight) => (
-                      <li className={grid.featureItem} key={highlight}>
-                        <p className={grid.featureDescription}>{highlight}</p>
-                      </li>
-                    ))}
-                  </ul>
-                ) : null}
-                {latestRelease.sizeBytes !== undefined ? (
-                  <p className={grid.featureDescription}>
-                    Size: {formatBytes(latestRelease.sizeBytes)}
-                  </p>
-                ) : null}
-                {latestRelease.sha256 !== undefined ? (
-                  <>
-                    <p className={grid.featureDescription}>SHA-256</p>
-                    <pre className={grid.monoBlock}>{latestRelease.sha256}</pre>
-                  </>
-                ) : null}
-                {latestRelease.downloadUrl !== undefined ? (
-                  <p className={grid.featureDescription}>
-                    <ExternalLink href={latestRelease.downloadUrl}>Download release</ExternalLink>
-                  </p>
-                ) : null}
-              </li>
-            </ul>
+          <Section
+            {...(releaseSectionSubtitle !== undefined ? { subtitle: releaseSectionSubtitle } : {})}
+            title={`Latest release: v${latestRelease.version}`}
+          >
+            {latestRelease.highlights !== undefined ? (
+              <ul className={grid.featureList}>
+                {latestRelease.highlights.map((highlight) => (
+                  <li className={grid.featureItem} key={highlight}>
+                    <p className={grid.featureDescription}>{highlight}</p>
+                  </li>
+                ))}
+              </ul>
+            ) : null}
+
+            <StatList>
+              <Stat label="Version" value={latestRelease.version} />
+              <Stat label="Released" value={formatISODate(latestRelease.date)} />
+              {latestRelease.sizeBytes !== undefined ? (
+                <Stat label="Size" value={formatBytes(latestRelease.sizeBytes)} />
+              ) : null}
+              {latestRelease.sha256 !== undefined ? (
+                <Stat label="SHA-256" mono value={latestRelease.sha256} />
+              ) : null}
+              {latestRelease.downloadUrl !== undefined ? (
+                <Stat
+                  label="Download"
+                  value={<ExternalLink href={latestRelease.downloadUrl}>Release page</ExternalLink>}
+                />
+              ) : null}
+            </StatList>
           </Section>
         ) : null}
 
-        {(product.repoUrl !== undefined || product.websiteUrl !== undefined) && (
+        {hasLinks ? (
           <Section title="Links">
-            <div className={grid.chipList}>
+            <ul className={grid.chipList}>
               {product.repoUrl !== undefined ? (
-                <ExternalLink href={product.repoUrl}>Source repository</ExternalLink>
+                <li>
+                  <ExternalLink href={product.repoUrl}>Source repository</ExternalLink>
+                </li>
               ) : null}
               {product.websiteUrl !== undefined ? (
-                <ExternalLink href={product.websiteUrl}>Product website</ExternalLink>
+                <li>
+                  <ExternalLink href={product.websiteUrl}>Product website</ExternalLink>
+                </li>
               ) : null}
-            </div>
+            </ul>
           </Section>
-        )}
+        ) : null}
       </PageBody>
     </>
   );

@@ -7,8 +7,9 @@ import { DetailNotFound } from '../components/DetailNotFound';
 import { ExternalLink } from '../components/ExternalLink';
 import { PageBody, PageHeader } from '../components/PageHeader';
 import { Section } from '../components/Section';
-import { advisorySeverityVariant, advisoryStatusLabel } from '../content/display';
+import { Stat, StatList } from '../components/Stat';
 import { getAdvisoryBySlug } from '../content';
+import { advisorySeverityVariant, advisoryStatusLabel } from '../content/display';
 import { formatISODate } from '../utils/format';
 
 export function AdvisoryDetailPage(): ReactElement {
@@ -45,16 +46,19 @@ export function AdvisoryDetailPage(): ReactElement {
       />
 
       <PageBody wide>
-        <Section title="Target">
-          <p className={grid.featureDescription}>
-            {advisory.vendor} · {advisory.product}
-            {advisory.affectedVersions !== undefined
-              ? ` · affected: ${advisory.affectedVersions}`
-              : null}
-            {advisory.fixedInVersion !== undefined
-              ? ` · fixed in ${advisory.fixedInVersion}`
-              : null}
-          </p>
+        <Section title="At a glance">
+          <StatList>
+            <Stat label="Vendor" value={advisory.vendor} />
+            <Stat label="Product" value={advisory.product} />
+            <Stat label="Severity" value={advisory.severity} />
+            {advisory.cveId !== undefined ? <Stat label="CVE" mono value={advisory.cveId} /> : null}
+            {advisory.affectedVersions !== undefined ? (
+              <Stat label="Affected" value={advisory.affectedVersions} />
+            ) : null}
+            {advisory.fixedInVersion !== undefined ? (
+              <Stat label="Fixed in" value={advisory.fixedInVersion} />
+            ) : null}
+          </StatList>
         </Section>
 
         {advisory.description !== undefined ? (

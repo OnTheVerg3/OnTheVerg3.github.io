@@ -1,15 +1,19 @@
-.eyebrow {
-  color: var(--brand-emerald);
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4) var(--space-6);
+  align-items: center;
 }
 
-.homeLink {
+.helperLink {
   color: var(--brand-emerald);
   text-decoration: none;
   border-bottom: 1px solid transparent;
+  font-size: var(--fs-body-lg);
   transition: border-color var(--duration-fast) var(--ease-standard);
 }
 
-.homeLink:hover,
-.homeLink:focus-visible {
+.helperLink:hover,
+.helperLink:focus-visible {
   border-bottom-color: var(--brand-emerald);
 }
