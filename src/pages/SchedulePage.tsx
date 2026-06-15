@@ -2,10 +2,18 @@ import type { ReactElement } from 'react';
 
 import { PageBody, PageHeader } from '../components/PageHeader';
 import { Section } from '../components/Section';
+import { useSeo } from '../utils/seo';
 import styles from './SchedulePage.module.css';
 import { GOOGLE_CALENDAR_EMBED_URL } from './scheduleConstants';
 
 export function SchedulePage(): ReactElement {
+  useSeo({
+    path: '/schedule',
+    title: 'Schedule',
+    description:
+      'Posted availability on a live Google Calendar embed. Times shown in America/Los Angeles.',
+  });
+
   return (
     <>
       <PageHeader

@@ -10,13 +10,52 @@ import { PageBody, PageHeader } from '../components/PageHeader';
 import { Section } from '../components/Section';
 import { Stat, StatList } from '../components/Stat';
 import { getProductBySlug } from '../content';
+import type { ProductEntry } from '../content';
 import { formatPlatformLabel, productStatusVariant } from '../content/display';
 import { formatBytes, formatISODate } from '../utils/format';
+import { SITE_BASE_URL, useSeo } from '../utils/seo';
+
+const SITE_PRODUCT_NOT_FOUND_DESCRIPTION =
+  'No SnakeWorks product matches this slug. Browse the catalogue or return home.';
+
+function buildProductJsonLd(product: ProductEntry): Record<string, unknown> {
+  const latest = product.releaseHistory?.[0];
+  const json: Record<string, unknown> = {
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareApplication',
+    name: product.name,
+    description: product.summary,
+    url: `${SITE_BASE_URL}/products/${product.slug}`,
+    operatingSystem: product.platforms.join(', '),
+    applicationCategory: 'UtilitiesApplication',
+    offers: {
+      '@type': 'Offer',
+      price: '0',
+      priceCurrency: 'USD',
+    },
+  };
+  if (latest !== undefined) {
+    json.softwareVersion = latest.version;
+    json.datePublished = latest.date;
+    if (latest.sizeBytes !== undefined) {
+      json.fileSize = `${String(latest.sizeBytes)} B`;
+    }
+  }
+  return json;
+}
 
 export function ProductDetailPage(): ReactElement {
   const { slug } = useParams<{ slug: string }>();
   const resolvedSlug = slug ?? '';
   const product = getProductBySlug(resolvedSlug);
+
+  useSeo({
+    path: `/products/${resolvedSlug}`,
+    title: product !== undefined ? product.name : 'Product not found',
+    description: product !== undefined ? product.summary : SITE_PRODUCT_NOT_FOUND_DESCRIPTION,
+    ogType: 'product',
+    ...(product !== undefined ? { jsonLd: buildProductJsonLd(product) } : {}),
+  });
 
   if (product === undefined) {
     return (

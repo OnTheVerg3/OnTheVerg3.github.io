@@ -11,13 +11,24 @@ import { Stat, StatList } from '../components/Stat';
 import { getAdvisoryBySlug } from '../content';
 import { advisorySeverityVariant, advisoryStatusLabel } from '../content/display';
 import { formatISODate } from '../utils/format';
+import { useSeo } from '../utils/seo';
 
 export function AdvisoryDetailPage(): ReactElement {
   const { slug } = useParams<{ slug: string }>();
   const resolvedSlug = slug ?? '';
   const advisory = getAdvisoryBySlug(resolvedSlug);
+  const isPublic = advisory?.status === 'public-disclosure';
 
-  if (advisory?.status !== 'public-disclosure') {
+  useSeo({
+    path: `/advisories/${resolvedSlug}`,
+    title: isPublic ? advisory.title : 'Advisory not found',
+    description: isPublic
+      ? advisory.summary
+      : 'No public advisory matches this slug. Browse the list or return home.',
+    ogType: 'article',
+  });
+
+  if (!isPublic) {
     return (
       <DetailNotFound
         backLabel="All advisories"

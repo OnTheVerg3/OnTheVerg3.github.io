@@ -5,6 +5,7 @@ import { Logo } from '../branding/Logo';
 import { Card } from '../components/Card';
 import grid from '../components/ContentDisplay.module.css';
 import { PageBody, PageHeader } from '../components/PageHeader';
+import { useSeo } from '../utils/seo';
 import styles from './LandingPage.module.css';
 
 interface LandingCard {
@@ -54,6 +55,12 @@ const landingCards: readonly LandingCard[] = [
 ];
 
 export function LandingPage(): ReactElement {
+  useSeo({
+    path: '/',
+    description:
+      'The corporate face of SnakeWorks and the personal portfolio of Aiden (OnTheVerg3), Software Developer and Security Advisor. SnakeWorks products, security advisories, and selected work.',
+  });
+
   return (
     <>
       <PageHeader

@@ -1,0 +1,7 @@
+# SnakeWorks Portfolio - https://ontheverg3.github.io
+# Generated as part of the Phase G SEO landing for the React overhaul.
+
+User-agent: *
+Allow: /
+
+Sitemap: https://ontheverg3.github.io/sitemap.xml

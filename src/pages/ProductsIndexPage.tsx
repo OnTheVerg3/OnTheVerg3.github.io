@@ -4,10 +4,18 @@ import { Badge } from '../components/Badge';
 import { Card } from '../components/Card';
 import grid from '../components/ContentDisplay.module.css';
 import { PageBody, PageHeader } from '../components/PageHeader';
-import { formatPlatformLabel, productStatusVariant } from '../content/display';
 import { getAllProducts } from '../content';
+import { formatPlatformLabel, productStatusVariant } from '../content/display';
+import { useSeo } from '../utils/seo';
 
 export function ProductsIndexPage(): ReactElement {
+  useSeo({
+    path: '/products',
+    title: 'Products',
+    description:
+      'SnakeWorks-branded Windows utilities built to do one job with full behavioural transparency. Each product ships as a focused native executable with no installer, no telemetry, and a documented P/Invoke surface.',
+  });
+
   const catalogue = getAllProducts();
 
   return (

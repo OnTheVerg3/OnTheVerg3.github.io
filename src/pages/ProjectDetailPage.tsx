@@ -10,12 +10,26 @@ import { Section } from '../components/Section';
 import { Stat, StatList } from '../components/Stat';
 import { getProjectBySlug, getProjectDisplayName } from '../content';
 import { projectStatusLabel } from '../content/display';
+import { useSeo } from '../utils/seo';
 import styles from './ProjectDetailPage.module.css';
 
 export function ProjectDetailPage(): ReactElement {
   const { slug } = useParams<{ slug: string }>();
   const resolvedSlug = slug ?? '';
   const project = getProjectBySlug(resolvedSlug);
+  const displayNameForSeo =
+    project !== undefined ? getProjectDisplayName(project) : 'Project not found';
+  const summaryForSeo =
+    project !== undefined
+      ? project.summary
+      : 'No project matches this slug. Browse the catalogue or return home.';
+
+  useSeo({
+    path: `/projects/${resolvedSlug}`,
+    title: displayNameForSeo,
+    description: summaryForSeo,
+    ogType: 'article',
+  });
 
   if (project === undefined) {
     return (
@@ -29,7 +43,7 @@ export function ProjectDetailPage(): ReactElement {
     );
   }
 
-  const displayName = getProjectDisplayName(project);
+  const displayName = displayNameForSeo;
   const techList = project.tech ?? [];
   const linkList = project.disclosed ? (project.links ?? []) : [];
 

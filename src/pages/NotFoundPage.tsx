@@ -3,10 +3,18 @@ import { Link, useLocation } from 'react-router-dom';
 
 import { Button } from '../components/Button';
 import { PageBody, PageHeader } from '../components/PageHeader';
+import { useSeo } from '../utils/seo';
 import styles from './NotFoundPage.module.css';
 
 export function NotFoundPage(): ReactElement {
   const location = useLocation();
+  useSeo({
+    path: location.pathname,
+    title: 'Page not found',
+    description:
+      'The requested URL does not match any route on this site. Use the navigation to find what you are looking for.',
+  });
+
   return (
     <>
       <PageHeader

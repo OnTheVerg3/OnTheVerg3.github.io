@@ -2,9 +2,33 @@ import type { ReactElement } from 'react';
 
 import { PageBody, PageHeader } from '../components/PageHeader';
 import { Section } from '../components/Section';
+import { SITE_BASE_URL, useSeo } from '../utils/seo';
 import styles from './AboutPage.module.css';
 
+const ABOUT_JSON_LD: Record<string, unknown> = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Aiden',
+  alternateName: 'OnTheVerg3',
+  jobTitle: 'Software Developer and Security Advisor',
+  url: `${SITE_BASE_URL}/about`,
+  sameAs: ['https://github.com/OnTheVerg3'],
+  affiliation: {
+    '@type': 'Organization',
+    name: 'SnakeWorks',
+    url: SITE_BASE_URL,
+  },
+};
+
 export function AboutPage(): ReactElement {
+  useSeo({
+    path: '/about',
+    title: 'About',
+    description:
+      'Aiden (OnTheVerg3) is a Software Developer and Security Advisor. SnakeWorks is the product label for focused native utilities shipping one job per executable with full behavioural transparency.',
+    jsonLd: ABOUT_JSON_LD,
+  });
+
   return (
     <>
       <PageHeader

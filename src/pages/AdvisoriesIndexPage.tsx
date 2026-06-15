@@ -4,10 +4,18 @@ import { Badge } from '../components/Badge';
 import { Card } from '../components/Card';
 import grid from '../components/ContentDisplay.module.css';
 import { PageBody, PageHeader } from '../components/PageHeader';
-import { advisorySeverityVariant } from '../content/display';
 import { getPublicAdvisories } from '../content';
+import { advisorySeverityVariant } from '../content/display';
+import { useSeo } from '../utils/seo';
 
 export function AdvisoriesIndexPage(): ReactElement {
+  useSeo({
+    path: '/advisories',
+    title: 'Advisories',
+    description:
+      'Published security advisories and coordinated disclosure write-ups by Aiden (OnTheVerg3). In-flight reports that have not reached public disclosure are not listed.',
+  });
+
   const published = getPublicAdvisories();
 
   return (

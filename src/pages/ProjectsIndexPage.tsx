@@ -6,8 +6,16 @@ import grid from '../components/ContentDisplay.module.css';
 import { PageBody, PageHeader } from '../components/PageHeader';
 import { getAllProjects, getProjectDisplayName } from '../content';
 import { projectStatusLabel } from '../content/display';
+import { useSeo } from '../utils/seo';
 
 export function ProjectsIndexPage(): ReactElement {
+  useSeo({
+    path: '/projects',
+    title: 'Projects',
+    description:
+      'Selected non-SnakeWorks work across game internals, security research, frameworks, and tooling. Entries marked undisclosed show abstract framing until cleared for publication.',
+  });
+
   const catalogue = getAllProjects();
 
   return (

@@ -4,6 +4,7 @@ import type { ReactElement } from 'react';
 import { ExternalLink } from '../components/ExternalLink';
 import { PageBody, PageHeader } from '../components/PageHeader';
 import { Section } from '../components/Section';
+import { useSeo } from '../utils/seo';
 import styles from './ContactPage.module.css';
 
 const GITHUB_PROFILE_URL = 'https://github.com/OnTheVerg3';
@@ -11,6 +12,13 @@ const GITHUB_REPO_URL = 'https://github.com/OnTheVerg3/OnTheVerg3.github.io';
 const CONTACT_EMAIL = 'aiden.eckstrom@gmail.com';
 
 export function ContactPage(): ReactElement {
+  useSeo({
+    path: '/contact',
+    title: 'Contact',
+    description:
+      'Contact Aiden (OnTheVerg3) via GitHub for public technical discussion or email for private coordination, security advisory reports, and vendor inbox routing.',
+  });
+
   return (
     <>
       <PageHeader
