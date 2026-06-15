@@ -1,0 +1,83 @@
+name: Deploy to GitHub Pages
+
+# Triggers
+#
+#   push (main):   Every merge / direct push to main triggers a full CI
+#                  gate + build + deploy. This is the production pipeline.
+#
+#   workflow_dispatch:  Manual re-run from the Actions tab without a code
+#                       change. Useful when GitHub Pages metadata, the
+#                       Pages source setting, or an Action's underlying
+#                       service had an outage and we want a fresh deploy.
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+# Required permissions for `actions/deploy-pages@v4`. The deploy step
+# uses the `pages` permission to publish and the `id-token` permission
+# to mint an OIDC token that GH Pages uses to verify the source of the
+# artifact (replaces the legacy GITHUB_TOKEN-only flow).
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Only one deploy in flight at a time, and never cancel an in-progress
+# deploy when a new commit lands. `cancel-in-progress: false` is the
+# GitHub-recommended setting for production deploys; an interrupted
+# deploy leaves the Pages distribution in an inconsistent state.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    name: Build (typecheck, lint, format, vite build)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies (clean, reproducible)
+        run: npm ci
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Format check
+        run: npm run format:check
+
+      - name: Build
+        run: npm run build
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    name: Deploy to GitHub Pages
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v4
