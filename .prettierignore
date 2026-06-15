@@ -8,11 +8,6 @@ coverage/
 *.log
 .eslintcache
 
-# Legacy static HTML, moved to _legacy/ during Phase C so Vite's dev server
-# does not resolve /home and /schedule against the legacy markup. Removed
-# entirely in Phase I (Legacy Cleanup).
-_legacy/
-
 # Scaffolding and project documentation authored manually with deliberate
 # table alignment, code-block layout, and column structure. Markdown
 # formatting is opt-in per project, not blanket.
