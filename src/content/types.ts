@@ -1,16 +1,21 @@
 /**
  * Content schemas for the SnakeWorks Portfolio.
  *
- * Three primary entry types power three section pairs in the IA:
+ * Two primary entry types power two section pairs in the IA:
  *
  *   ProductEntry   /products            and /products/:slug
- *   ProjectEntry   /projects            and /projects/:slug
  *   AdvisoryEntry  /advisories          and /advisories/:slug
  *
  * Data files in this folder export `readonly` arrays of these entry types
  * so the rest of the app can consume them with full type safety and so
  * `tsc` flags missing fields the moment a schema evolves. The barrel
  * exports + lookup helpers live in `index.ts`.
+ *
+ * The `/engineering` route (formerly `/projects`) is not content-driven:
+ * its language entries live inline in `src/pages/EngineeringPage.tsx`
+ * and use the existing `FeatureGridItem` shape from the components
+ * layer. The `ProjectEntry` schema and its helpers were removed in the
+ * IA pivot that replaced the personal-projects index with a craft page.
  *
  * Authority: `SnakeWorks/Portfolio-Internal/ARCHITECTURE.md` rev 1
  * (operator-internal, not in this repo). Schema fields are deliberately
@@ -108,47 +113,6 @@ export interface ProductEntry {
   /** Square product icon URL, served from `public/`. */
   readonly iconUrl?: string;
   readonly screenshots?: readonly Screenshot[];
-}
-
-// ---------------------------------------------------------------------------
-// Project
-// ---------------------------------------------------------------------------
-
-/**
- * Disclosure-aware non-SnakeWorks project entry.
- *
- * The `disclosed` boolean gates whether the project's real name and full
- * description are surfaced. Undisclosed projects still appear in the
- * index, but using their `publicName` (an abstract framing chosen by
- * the operator) and `summary` (a sanitized description). Detail page
- * also surfaces only the public-safe fields when `disclosed` is `false`.
- */
-export interface ProjectEntry {
-  readonly slug: Slug;
-  /**
-   * Master gate. When `false`, the renderer must use only `publicName`,
-   * `summary`, and other fields explicitly marked public-safe.
-   */
-  readonly disclosed: boolean;
-  /** Always-displayable name (may be abstract framing for undisclosed entries). */
-  readonly publicName: string;
-  /** Real internal name. Rendered only when `disclosed` is `true`. */
-  readonly privateName?: string;
-  /** Always-displayable short description. Must be safe to show regardless of `disclosed`. */
-  readonly summary: string;
-  /** Optional longer-form description. Rendered only when `disclosed` is `true`. */
-  readonly description?: string;
-  /** Year of work (e.g. `2024`) or year range (e.g. `'2023-2025'`). */
-  readonly year: number | string;
-  /** Free-form tags for filtering and chrome (e.g. `'game-modding'`, `'security-research'`). */
-  readonly tags?: readonly string[];
-  /** Technologies / languages / frameworks. Always safe to show. */
-  readonly tech?: readonly string[];
-  /** Outbound links (repo, demo, write-up). Rendered only when `disclosed` is `true`. */
-  readonly links?: readonly LinkRef[];
-  /** Visual assets. Rendered only when `disclosed` is `true`. */
-  readonly screenshots?: readonly Screenshot[];
-  readonly status?: 'active' | 'paused' | 'shipped' | 'archived' | 'private';
 }
 
 // ---------------------------------------------------------------------------

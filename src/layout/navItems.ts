@@ -25,7 +25,7 @@ export const navItems: readonly NavItem[] = [
   { to: '/', label: 'Home', end: true },
   { to: '/about', label: 'About' },
   { to: '/products', label: 'Products' },
-  { to: '/projects', label: 'Projects' },
+  { to: '/engineering', label: 'Engineering' },
   { to: '/advisories', label: 'Advisories' },
   { to: '/schedule', label: 'Schedule' },
   { to: '/contact', label: 'Contact' },

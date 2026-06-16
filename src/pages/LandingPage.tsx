@@ -1,4 +1,4 @@
-import { BookOpen, Calendar, Mail, Package, Shield, User, type LucideIcon } from 'lucide-react';
+import { Calendar, Code2, Mail, Package, Shield, User, type LucideIcon } from 'lucide-react';
 import type { ReactElement } from 'react';
 
 import { Logo } from '../branding/Logo';
@@ -30,10 +30,11 @@ const landingCards: readonly LandingCard[] = [
     icon: Package,
   },
   {
-    to: '/projects',
-    title: 'Projects',
-    description: 'Selected work across game internals, security research, and tooling.',
-    icon: BookOpen,
+    to: '/engineering',
+    title: 'Engineering',
+    description:
+      'The languages I reach for, and the kinds of systems each one has been applied to.',
+    icon: Code2,
   },
   {
     to: '/advisories',

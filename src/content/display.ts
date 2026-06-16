@@ -1,5 +1,5 @@
 import type { BadgeVariant } from '../components/Badge';
-import type { AdvisorySeverity, AdvisoryStatus, ProductStatus, ProjectEntry } from './types';
+import type { AdvisorySeverity, AdvisoryStatus, ProductStatus } from './types';
 
 export function productStatusVariant(status: ProductStatus): BadgeVariant {
   switch (status) {
@@ -35,13 +35,6 @@ export function advisorySeverityVariant(severity: AdvisorySeverity): BadgeVarian
       return _exhaustive;
     }
   }
-}
-
-export function projectStatusLabel(entry: ProjectEntry): string {
-  if (entry.status !== undefined) {
-    return entry.status;
-  }
-  return entry.disclosed ? 'active' : 'private';
 }
 
 export function formatPlatformLabel(platform: string): string {

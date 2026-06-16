@@ -12,11 +12,12 @@
 //   - Non-public advisories (status !== 'public-disclosure') are
 //     filtered the same way the runtime helper getPublicAdvisories()
 //     filters them.
-//   - Undisclosed projects (disclosed: false) are filtered out so we
-//     do not actively advertise their slugs to search engines.
-//     Direct URL hits still resolve at runtime (the index page links
-//     to them with abstract framing), but the sitemap should not
-//     boost their crawlability.
+//
+// Note on /engineering: this is a single static page (no per-entry
+// detail routes), so it is included once in STATIC_ROUTES below.
+// The personal-projects index that previously lived at /projects
+// was removed during the IA pivot; no /projects/:slug enumeration
+// is needed.
 //
 // Output format: sitemap protocol 0.9, one <url> per route. The
 // lastmod is set to the script's run timestamp (today) for every URL;
@@ -36,7 +37,7 @@ const STATIC_ROUTES = [
   { path: '/', priority: '1.0', changefreq: 'monthly' },
   { path: '/about', priority: '0.8', changefreq: 'monthly' },
   { path: '/products', priority: '0.9', changefreq: 'weekly' },
-  { path: '/projects', priority: '0.9', changefreq: 'monthly' },
+  { path: '/engineering', priority: '0.8', changefreq: 'monthly' },
   { path: '/advisories', priority: '0.8', changefreq: 'weekly' },
   { path: '/schedule', priority: '0.6', changefreq: 'weekly' },
   { path: '/contact', priority: '0.7', changefreq: 'monthly' },
@@ -57,10 +58,6 @@ function readSlugs(relativePath) {
 
 function readPublicAdvisorySlugs() {
   return readSlugsMatchingField('src/content/advisories.ts', /status:\s*'public-disclosure'/);
-}
-
-function readDisclosedProjectSlugs() {
-  return readSlugsMatchingField('src/content/projects.ts', /disclosed:\s*true/);
 }
 
 function readSlugsMatchingField(relativePath, fieldRegex) {
@@ -105,7 +102,6 @@ function buildSitemap() {
   const lastmod = new Date().toISOString().slice(0, 10);
 
   const productSlugs = readSlugs('src/content/products.ts');
-  const projectSlugs = readDisclosedProjectSlugs();
   const advisorySlugs = readPublicAdvisorySlugs();
 
   const urls = [
@@ -113,7 +109,6 @@ function buildSitemap() {
       urlBlock(route.path, lastmod, route.priority, route.changefreq),
     ),
     ...productSlugs.map((slug) => urlBlock(`/products/${slug}`, lastmod, '0.8', 'monthly')),
-    ...projectSlugs.map((slug) => urlBlock(`/projects/${slug}`, lastmod, '0.6', 'monthly')),
     ...advisorySlugs.map((slug) => urlBlock(`/advisories/${slug}`, lastmod, '0.7', 'yearly')),
   ];
 

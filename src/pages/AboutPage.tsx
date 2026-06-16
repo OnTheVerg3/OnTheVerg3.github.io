@@ -47,11 +47,11 @@ export function AboutPage(): ReactElement {
         <Section title="The operator">
           <div className={styles.prose}>
             <p>
-              Work spans Windows internals, kernel and hypervisor research, offensive security
-              tooling, native C / C++ and .NET development, full-stack web, and game internals. The
-              through-line is building precise, auditable systems: products that earn their
-              reliability claims, research platforms with explicit threat models, and advisories
-              that document findings with the same rigor as the code.
+              Work spans native Windows software, full-stack web, mobile, and systems-level
+              engineering across C, C++, and .NET. The through-line is building precise, auditable
+              systems: products that earn their reliability claims, and findings documented with the
+              same rigor as the code. The Engineering page covers the languages reached for
+              regularly and the kinds of systems each one has been applied to.
             </p>
             <p>
               Security advisory work is conducted for educational purposes and to advise vendors of
@@ -84,9 +84,9 @@ export function AboutPage(): ReactElement {
           <div className={styles.prose}>
             <p>
               The portfolio is a React 19 + Vite 7 + TypeScript single-page application deployed to
-              GitHub Pages. Corporate product pages and personal project entries share one
-              navigation shell and one visual language; routing separates the two identities rather
-              than duplicating chrome or palette.
+              GitHub Pages. Corporate product pages and personal sections (Engineering, Advisories)
+              share one navigation shell and one visual language; routing separates the two
+              identities rather than duplicating chrome or palette.
             </p>
           </div>
         </Section>

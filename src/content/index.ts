@@ -14,14 +14,13 @@
 
 import { advisories } from './advisories';
 import { products } from './products';
-import { projects } from './projects';
-import type { AdvisoryEntry, ProductEntry, ProjectEntry, Slug } from './types';
+import type { AdvisoryEntry, ProductEntry, Slug } from './types';
 
 // ---------------------------------------------------------------------------
 // Re-exports
 // ---------------------------------------------------------------------------
 
-export { advisories, products, projects };
+export { advisories, products };
 export type * from './types';
 
 // ---------------------------------------------------------------------------
@@ -34,32 +33,6 @@ export function getAllProducts(): readonly ProductEntry[] {
 
 export function getProductBySlug(slug: Slug): ProductEntry | undefined {
   return products.find((entry) => entry.slug === slug);
-}
-
-// ---------------------------------------------------------------------------
-// Projects
-// ---------------------------------------------------------------------------
-
-export function getAllProjects(): readonly ProjectEntry[] {
-  return projects;
-}
-
-export function getProjectBySlug(slug: Slug): ProjectEntry | undefined {
-  return projects.find((entry) => entry.slug === slug);
-}
-
-/**
- * Returns the public-facing display name for a project. If the project
- * is undisclosed, returns `publicName`; otherwise returns `privateName`
- * when set, falling back to `publicName`. Consumers should always go
- * through this helper rather than rendering `entry.privateName` directly
- * so the disclosure gate cannot be bypassed by accident.
- */
-export function getProjectDisplayName(entry: ProjectEntry): string {
-  if (entry.disclosed && entry.privateName !== undefined && entry.privateName.length > 0) {
-    return entry.privateName;
-  }
-  return entry.publicName;
 }
 
 // ---------------------------------------------------------------------------

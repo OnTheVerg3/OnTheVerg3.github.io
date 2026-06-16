@@ -36,8 +36,8 @@ export function NotFoundPage(): ReactElement {
           <Link className={styles.helperLink} to="/products">
             Browse products
           </Link>
-          <Link className={styles.helperLink} to="/projects">
-            Browse projects
+          <Link className={styles.helperLink} to="/engineering">
+            Engineering
           </Link>
         </div>
       </PageBody>

@@ -6,12 +6,11 @@ import { AboutPage } from './pages/AboutPage';
 import { AdvisoriesIndexPage } from './pages/AdvisoriesIndexPage';
 import { AdvisoryDetailPage } from './pages/AdvisoryDetailPage';
 import { ContactPage } from './pages/ContactPage';
+import { EngineeringPage } from './pages/EngineeringPage';
 import { LandingPage } from './pages/LandingPage';
 import { NotFoundPage } from './pages/NotFoundPage';
 import { ProductDetailPage } from './pages/ProductDetailPage';
 import { ProductsIndexPage } from './pages/ProductsIndexPage';
-import { ProjectDetailPage } from './pages/ProjectDetailPage';
-import { ProjectsIndexPage } from './pages/ProjectsIndexPage';
 import { SchedulePage } from './pages/SchedulePage';
 
 /**
@@ -32,8 +31,7 @@ export function App(): ReactElement {
         <Route path="about" element={<AboutPage />} />
         <Route path="products" element={<ProductsIndexPage />} />
         <Route path="products/:slug" element={<ProductDetailPage />} />
-        <Route path="projects" element={<ProjectsIndexPage />} />
-        <Route path="projects/:slug" element={<ProjectDetailPage />} />
+        <Route path="engineering" element={<EngineeringPage />} />
         <Route path="advisories" element={<AdvisoriesIndexPage />} />
         <Route path="advisories/:slug" element={<AdvisoryDetailPage />} />
         <Route path="schedule" element={<SchedulePage />} />
